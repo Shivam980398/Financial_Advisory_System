@@ -1,0 +1,20 @@
+@import "tailwindcss";
+body {
+  overscroll-behavior: none;
+}
+
+:root {
+  --primary: #2563eb; /* blue-600 */
+  --dark: #1f2937; /* gray-800 */
+  --light: #f9fafb; /* gray-50 */
+  --text-dark: #111827;
+  --text-gray: #6b7280;
+}
+
+:root {
+  --primary-color: #4f46e5; /* Indigo */
+  --secondary-color: #6366f1;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --border: #e5e7eb;
+}
