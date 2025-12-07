@@ -9,7 +9,8 @@ const LandingScreen = () => {
       <div className="h-80 w-full"></div>
       <div className="flex flex-col p-6">
         <h1 className="text-2xl font-sans font-bold text-gray-900">
-          Welcome to <span className="text-[#6C25FF]">FLAFAT</span>
+          Welcome to{" "}
+          <span className="text-[#6C25FF]">FAS (Financial Advisor System)</span>
         </h1>
         <div className="w-[300px]">
           <p className="mt-2 text-sm text-gray-600 leading-tight whitespace-pre-wrap">
