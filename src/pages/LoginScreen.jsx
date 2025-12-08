@@ -40,7 +40,9 @@ const Login = () => {
         });
         if (response.status === 200 && response.data) {
           Cookies.set("token", response.data.token, { expires: 1 });
-          const userName = response.data.user.firstName || "User";
+          const userName =
+            response.data.user.firstName + " " + response.data.user.lastName ||
+            "User";
           localStorage.setItem("userName", userName);
           toast.success("Login Successful");
           login();

@@ -41,6 +41,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/accountsettings"
+            element={
+              <ProtectedRoute>
+                <AccountSettings />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/report"
@@ -62,14 +70,6 @@ const App = () => {
             }
           />
 
-          <Route
-            path="/accountsettings"
-            element={
-              <ProtectedRoute>
-                <AccountSettings />
-              </ProtectedRoute>
-            }
-          />
           {/* <Route
             path="/dashboard"
             element={

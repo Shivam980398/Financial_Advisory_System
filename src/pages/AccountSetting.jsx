@@ -1,47 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import { Cookie } from "lucide-react";
 import Cookies from "js-cookie";
+import { FetchUserDetailContext } from "../context/fetchUserDetailContext";
 
 export default function AccountSettings() {
-  // const [image, setImage] = useState("https://i.pravatar.cc/100");
-  const [image, setImage] = useState(null);
-
-  // User Data (you will later replace this with real API)
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    gender: "",
-    id: "",
-  });
-
-  // Edit Modal State
-  const [openEdit, setOpenEdit] = useState(false);
-  const [editData, setEditData] = useState(user);
-
-  // Upload Image Handler
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result); // Display uploaded image
-      localStorage.setItem("profileImage", reader.result); // Save
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const getInitials = (firstName, lastName) => {
-    if (!firstName && !lastName) return "?";
-    const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
-    const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
-    return firstInitial + lastInitial;
-  };
   useEffect(() => {
     // Fetch user data from API when component mounts
     const storedImage = localStorage.getItem("profileImage");
@@ -56,8 +21,8 @@ export default function AccountSettings() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data.user);
-        console.log("User data:", res.data);
-        // console.log("user data:", res.data.user);
+        // console.log("User data:", res.data);
+        console.log("user data:", res.data.user);
         // setEditData(res.data);
       } catch (error) {
         toast.error("Failed to fetch user data");
@@ -67,34 +32,19 @@ export default function AccountSettings() {
     fetchUserData();
   }, []);
 
-  // Save Profile Handler
-  const handleSave = async () => {
-    try {
-      const backend = "https://sofia-node.onrender.com/api/v1";
-
-      const token = Cookies.get("token");
-
-      const res = await axios.put(
-        `${backend}/profile`,
-        {
-          firstName: editData.firstName,
-          lastName: editData.lastName,
-          phone: editData.phone,
-          email: editData.email,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      toast.success("Profile updated");
-      setUser(res.data.user);
-      setOpenEdit(false);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update");
-    }
-  };
-
+  const {
+    image,
+    setImage,
+    getInitials,
+    openEdit,
+    setOpenEdit,
+    user,
+    setUser,
+    editData,
+    setEditData,
+    handleImageUpload,
+    handleSave,
+  } = useContext(FetchUserDetailContext);
   return (
     <div className="w-full max-w-md mx-auto bg-white shadow-md rounded-lg p-5">
       {/* Profile Image */}
